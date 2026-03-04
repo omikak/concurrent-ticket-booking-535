@@ -1,0 +1,4 @@
+node_modules/
+.env
+Redis-x64-5.0.14.1/
+.vercel

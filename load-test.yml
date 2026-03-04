@@ -1,10 +1,13 @@
 config:
   target: "http://localhost:3000"
   phases:
-    - duration: 10
-      arrivalRate: 20
+    - duration: 10       # Run test for 10 seconds
+      arrivalRate: 20    # 20 requests per second
 
 scenarios:
   - flow:
       - post:
           url: "/api/book"
+          json:
+            seatId: "A{{ $randomNumber(1, 20) }}"
+            userId: "{{ $randomNumber(1, 1000) }}"
