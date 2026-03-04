@@ -3,7 +3,7 @@ import redisClient from "../redisClient.js";
 
 const router = express.Router();
 
-// Lock a seat
+// Lock seat
 router.post("/lock", async (req, res) => {
   const { seatId, userId } = req.body;
   const lockKey = `seat:${seatId}`;
@@ -18,7 +18,7 @@ router.post("/lock", async (req, res) => {
   }
 });
 
-// Unlock a seat
+// Unlock seat
 router.post("/unlock", async (req, res) => {
   const { seatId, userId } = req.body;
   const lockKey = `seat:${seatId}`;
@@ -50,4 +50,4 @@ router.get("/status", async (req, res) => {
   }
 });
 
-export default router;
+export default router; 

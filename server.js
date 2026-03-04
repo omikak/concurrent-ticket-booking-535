@@ -1,24 +1,20 @@
+// server.js
 import express from "express";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 import ticketRoutes from "./routes/tickets.js";
 
-dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
+
+// Middleware to parse JSON requests
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/tickets", ticketRoutes);
+// API routes
+app.use("/api", ticketRoutes);
 
-// Fallback to index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.html"));
+// Health check route (optional but helpful)
+app.get("/", (req, res) => {
+  res.send("Concurrent Ticket Booking API is running!");
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Use the Vercel-provided port or fallback to 3000
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server running on port ${port}`));
